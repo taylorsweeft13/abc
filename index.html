@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>format tool</title>
+    <style>
+        body {
+            font-size: 200%;
+        }
+
+        .notepad {
+            width: 1024px;
+            border: 2px solid #900;
+            height: 250px;
+            padding: 10px;
+            font-size: 70%;
+        }
+
+        #wai {
+            width: 1024px;
+            border: 2px solid #900;
+            height: 800px;
+            padding: 10px;
+            overflow: hidden
+        }
+
+        .div_left {
+            float: left;
+            width: 650px;
+            height: 780px;
+            border: 1px solid #060;
+            font-size: 70%;
+        }
+
+        .div_right {
+            float: right;
+            width: 350px;
+            height: 780px;
+            border: 1px solid #00F
+        }
+    </style>
+</head>
+<body onload="page_load()">
+<textarea id="notepad" class="notepad" spellcheck="false">姓名：&#10手机：&#10卡：&#10身份证：&#10活期存折：&#10一本通：&#10对公户：&#10营业执照：&#10账号：&#10</textarea>
+<div id="wai">
+    <textarea id="formatted" class="div_left" spellcheck="false"></textarea>
+    <textarea id="origin" class="div_right" spellcheck="false" onchange="txt_change()"></textarea>
+</div>
+</body>
+<script>
+    window.setInterval(function () {
+        localStorage.setItem("notepad", document.getElementById('notepad').value);
+        console.log(localStorage.getItem("temp"));
+    }, 10000);
+
+    function txt_change() {
+        document.getElementById('formatted').value = document.getElementById('origin').value.replace(/\s/g, "").split("，").join("\n");
+    }
+
+    function page_load() {
+        if (window.localStorage.getItem('notepad').value != "") {
+            document.getElementById('notepad').value = window.localStorage.getItem('notepad');
+        }
+    }
+</script>
+</html>
